@@ -94,7 +94,6 @@ const godNames = [
   "Yemoja",
   "Ymir",
   "Zeus",
-  // Add more god names here
 ];
 
 async function fetchGodData(godName: string): Promise<GodData | null> {
@@ -113,7 +112,6 @@ async function fetchGodData(godName: string): Promise<GodData | null> {
     const htmlContent = data.parse.text["*"];
 
     // Parse the HTML to extract god info
-    // This is a simplified version - we'll extract key data
     const imageUrl = await fetchGodImage(godName);
 
     const godData: GodData = {
@@ -196,15 +194,6 @@ async function fetchGodImage(godName: string): Promise<string> {
   return page?.thumbnail?.source ?? "";
 }
 
-/*
-function extractImageUrl(html: string, godName: string): string {
-  const match = html.match(/SkinArt_.*?_Default\.jpg/);
-  if (match) {
-    return `https://wiki.smite2.com/images/${match[0]}`;
-  }
-  return '';
-}
-*/
 function extractAbilityName(html: string, abilityType: string): string {
   const regex = new RegExp(
     `<th colspan="2"><span style="color:#fff;">${abilityType}</span> - <span style="font-size: 125%; font-weight: bold;">(.*?)</span>`
