@@ -7,7 +7,8 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "init-db": "ts-node src/scripts/initDb.ts"
+    "init-db": "ts-node src/scripts/initDb.ts",
+    "fetch-gods": "ts-node scripts/fetchGods.ts"
   },
   "keywords": [],
   "author": "",
