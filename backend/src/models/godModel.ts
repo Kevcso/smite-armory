@@ -1,4 +1,4 @@
-import pool from '../config/database';
+import pool from "../config/database";
 
 export interface God {
   id?: number;
@@ -21,12 +21,12 @@ export interface God {
 }
 
 export const getAllGods = async () => {
-  const result = await pool.query('SELECT * FROM gods ORDER BY name');
+  const result = await pool.query("SELECT * FROM gods ORDER BY name");
   return result.rows;
 };
 
 export const getGodById = async (id: number) => {
-  const result = await pool.query('SELECT * FROM gods WHERE id = $1', [id]);
+  const result = await pool.query("SELECT * FROM gods WHERE id = $1", [id]);
   return result.rows[0];
 };
 
@@ -38,10 +38,32 @@ export const createGod = async (god: God) => {
      ultimate_name, ultimate_description)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
      RETURNING *`,
-    [god.name, god.title, god.class, god.pantheon, god.description, god.image_url,
-     god.passive_name, god.passive_description, god.ability1_name, god.ability1_description,
-     god.ability2_name, god.ability2_description, god.ability3_name, god.ability3_description,
-     god.ultimate_name, god.ultimate_description]
+    [
+      god.name,
+      god.title,
+      god.class,
+      god.pantheon,
+      god.description,
+      god.image_url,
+      god.passive_name,
+      god.passive_description,
+      god.ability1_name,
+      god.ability1_description,
+      god.ability2_name,
+      god.ability2_description,
+      god.ability3_name,
+      god.ability3_description,
+      god.ultimate_name,
+      god.ultimate_description,
+    ]
+  );
+  return result.rows[0];
+};
+
+export const removeGod = async (id: number) => {
+  const result = await pool.query(
+    "DELETE FROM gods WHERE id = $1 RETURNING *",
+    [id]
   );
   return result.rows[0];
 };
