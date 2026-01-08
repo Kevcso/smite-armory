@@ -67,3 +67,11 @@ export const removeGod = async (id: number) => {
   );
   return result.rows[0];
 };
+
+export const updateGodRole = async (id: number, role: string) => {
+  const result = await pool.query(
+    "UPDATE gods SET role = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2 RETURNING *",
+    [role, id]
+  );
+  return result.rows[0];
+};

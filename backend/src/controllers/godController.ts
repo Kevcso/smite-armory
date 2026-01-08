@@ -41,3 +41,14 @@ export const removeGod = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to remove god" });
   }
 };
+
+export const updateGodRole = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { role } = req.body;
+    const updatedGod = await godModel.updateGodRole(id, role);
+    res.json(updatedGod);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update god role" });
+  }
+};
