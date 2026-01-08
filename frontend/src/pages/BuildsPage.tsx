@@ -33,29 +33,42 @@ function BuildsPage() {
     return (
       <div className="min-h-screen bg-gray-950 text-white w-full">
         <nav className="bg-black border-b border-gray-800 w-full">
-          <div className="w-full px-12 py-4">
-            <div className="flex justify-between items-center">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="flex justify-between items-center relative">
               <Link to="/" className="text-2xl font-bold">
                 <span className="text-red-500">SMITE</span>
                 <span className="text-gray-100">ARMORY</span>
               </Link>
 
-              <div className="flex gap-6 items-center">
+              {/* Centered Navigation Links */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-8 items-center">
                 <Link
                   to="/gods"
                   className="text-gray-300 hover:text-red-500 transition font-medium"
                 >
                   Gods
                 </Link>
-                <Link to="/builds" className="text-red-500 font-medium">
+                <Link
+                  to="/builds"
+                  className="text-red-500 font-medium pb-1 border-b-2 border-red-500"
+                >
                   Builds
+                </Link>
+                <Link
+                  to="/items"
+                  className="text-gray-300 hover:text-red-500 transition font-medium"
+                >
+                  Items
                 </Link>
               </div>
             </div>
           </div>
         </nav>
         <div className="flex items-center justify-center h-96">
-          <p className="text-xl text-gray-400">Loading builds...</p>
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+            <p className="text-xl text-gray-400">Loading builds...</p>
+          </div>
         </div>
       </div>
     );
@@ -65,22 +78,32 @@ function BuildsPage() {
     <div className="min-h-screen bg-gray-950 text-white w-full">
       {/* Navigation */}
       <nav className="bg-black border-b border-gray-800 w-full">
-        <div className="w-full px-12 py-4">
-          <div className="flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center relative">
             <Link to="/" className="text-2xl font-bold">
               <span className="text-red-500">SMITE</span>
               <span className="text-gray-100">ARMORY</span>
             </Link>
 
-            <div className="flex gap-6 items-center">
+            {/* Centered Navigation Links */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 flex gap-8 items-center">
               <Link
                 to="/gods"
                 className="text-gray-300 hover:text-red-500 transition font-medium"
               >
                 Gods
               </Link>
-              <Link to="/builds" className="text-red-500 font-medium">
+              <Link
+                to="/builds"
+                className="text-red-500 font-medium pb-1 border-b-2 border-red-500"
+              >
                 Builds
+              </Link>
+              <Link
+                to="/items"
+                className="text-gray-300 hover:text-red-500 transition font-medium"
+              >
+                Items
               </Link>
             </div>
           </div>
@@ -88,18 +111,20 @@ function BuildsPage() {
       </nav>
 
       {/* Page Header */}
-      <div className="w-full px-12 py-12 border-b border-gray-800">
-        <h1 className="text-5xl font-bold mb-4">All Builds</h1>
-        <p className="text-xl text-gray-400">
-          Browse {builds.length} pro builds and strategies
-        </p>
+      <div className="w-full border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <h1 className="text-4xl font-bold mb-2">All Builds</h1>
+          <p className="text-gray-400">
+            Browse {builds.length} pro builds and strategies
+          </p>
+        </div>
       </div>
 
       {/* Builds Grid */}
-      <div className="w-full px-12 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {builds.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-2xl text-gray-400">No builds available yet</p>
+            <p className="text-xl text-gray-400">No builds available yet</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -107,17 +132,17 @@ function BuildsPage() {
               <Link
                 key={build.id}
                 to={`/builds/${build.id}`}
-                className="bg-gray-900 rounded-xl border border-gray-800 hover:border-red-500 transition p-6"
+                className="bg-gray-900 rounded-xl border border-gray-800 hover:border-red-500 transition p-6 group"
               >
                 {/* Build Header */}
                 <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-1 hover:text-red-500 transition">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold mb-1 group-hover:text-red-500 transition truncate">
                       {build.build_name}
                     </h3>
                     <Link
                       to={`/gods/${build.god_id}`}
-                      className="text-lg text-purple-400 hover:text-purple-300"
+                      className="text-base text-purple-400 hover:text-purple-300 truncate block"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {build.god_name}
@@ -125,14 +150,14 @@ function BuildsPage() {
                   </div>
 
                   {build.votes > 0 && (
-                    <span className="bg-yellow-600 px-3 py-1 rounded font-semibold">
+                    <span className="bg-yellow-600 px-2 py-1 rounded text-sm font-semibold ml-2">
                       ⭐ {build.votes}
                     </span>
                   )}
                 </div>
 
                 {/* Build Tags */}
-                <div className="flex gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {build.role && (
                     <span className="bg-blue-600 px-3 py-1 rounded text-sm font-semibold">
                       {build.role}
@@ -147,14 +172,14 @@ function BuildsPage() {
 
                 {/* Description */}
                 {build.description && (
-                  <p className="text-gray-400 text-sm line-clamp-3">
+                  <p className="text-gray-400 text-sm line-clamp-3 mb-4">
                     {build.description}
                   </p>
                 )}
 
                 {/* View Details Button */}
-                <div className="mt-4 pt-4 border-t border-gray-800">
-                  <span className="text-red-500 font-semibold">
+                <div className="pt-4 border-t border-gray-800">
+                  <span className="text-red-500 font-semibold group-hover:text-red-400">
                     View Full Build →
                   </span>
                 </div>
