@@ -12,6 +12,8 @@ import AddItem from "./pages/AddItem";
 import ViewItems from "./pages/ViewItems";
 import AddBuild from "./pages/AddBuild";
 import ViewBuilds from "./pages/ViewBuilds";
+import AssignRoles from "./pages/AssignRoles";
+import ItemsPage from "./pages/ItemsPage";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
       <Route path="/admin/items" element={<ViewItems />} />
       <Route path="/admin/add-build" element={<AddBuild />} />
       <Route path="/admin/builds" element={<ViewBuilds />} />
+      <Route path="/admin/assign-roles" element={<AssignRoles />} />
+      <Route path="/items" element={<ItemsPage />} />
     </Routes>
   );
 }
